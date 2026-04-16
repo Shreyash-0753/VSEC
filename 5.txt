@@ -1,0 +1,29 @@
+1. Create new folder 
+  - Create app.py 
+  - Create requirements.txt (flask, numpy)
+  - Create Dockerfile
+
+2. Open folder's terminal : 
+  - docker --version
+  - docker build -t folder_name
+  - docker run -p 5000:5000 folder_name
+  - Click on https link
+
+3. app.py : 
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+  return "AI Model is Running!"
+
+@app.route('/predict', methods=['POST'])
+def predict():
+  data = request.json['number']
+  result = data * 2
+  return jsonify({'result': result})
+  
+if __name__ == '__main__':
+  app.run(host='0.0.0.0', port=5000)
