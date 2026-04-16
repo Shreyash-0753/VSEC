@@ -1,0 +1,32 @@
+1. Open new folder
+ - Create app.py
+ - Create requirements.txt(Flask)
+ - Create Dockerfile
+
+2. On Terminal :
+    docker --version
+    minikube version
+    minikube start --driver = docker
+    kubectl get nodes
+    eval $(minikube docker-env)
+    docker build -t folder_name .
+    minikube images | grep folder_name
+    minikube image load folder_name
+    minikube dashboard
+
+3. On Minikube Dashboard
+  - Add yaml file from '+' at top right corner and upload
+  - Check pods
+  - Add service yaml file similarly from '+' and upload
+
+4. Open new terminal 
+      minikube service ai-app-service
+
+5. Again open new terminal
+      minikube addons enable metrics-server
+      kubectl top pods
+
+6. Open pods on dasboard, wait for 2 mins and reload the page
+
+7. Open new terminal 
+      kubectl autoscale deployment ai-app --cpu-percent=50 --min=2 --max=10
