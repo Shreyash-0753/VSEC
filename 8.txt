@@ -30,3 +30,27 @@
 
 7. Open new terminal 
       kubectl autoscale deployment ai-app --cpu-percent=50 --min=2 --max=10
+8. app.py :
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+ return "AI Model Running in Kubernetes"
+
+@app.route("/predict", methods=["POST"])
+def predict():
+ data = request.json["number"]
+ result = data * 2
+ return jsonify({"result": result})
+
+if __name__ == "__main__":
+ app.run(host="0.0.0.0", port=5000)
+
+9. dockerfile : 
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip install flask
+EXPOSE 5000
+CMD ["python","app.py"]
