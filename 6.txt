@@ -1,0 +1,66 @@
+1. Create new folder
+  - Open Terminal :
+      docker --version
+      sudo apt install docker-compose -y
+      docker-compose --version
+
+2. Create new folder 'Backend' inside main folder
+  - Create app.py :
+  - Create requirements.txt(flask, pymongo)
+  - Create Dockerfile
+
+3. Create new folder 'Frontend' inside main folder
+  - Create index.html
+  - Create Dockerfile
+
+4. Create docker-compose.yml in main folder
+
+5. On Terminal : 
+    docker-compose up --build
+
+6. Open new Terminal : 
+    docker ps
+
+7. For Frontend open localhost:8081
+   For Backend open localhost:5001
+
+8. Open Terminal :
+    docker exec -it mongo_db mongosh
+    
+    show dbs
+    use testdb
+    db.users.insertOne({name : "testuser"})
+    db.users.find()
+    exit
+
+    docker logs mongo_db
+    docker-compose down
+
+
+9. app.py : 
+from flask import Flask
+from pymongo import MongoClient
+
+app = Flask(_name_)
+
+client = MongoClient("mongodb://mongodb:27017/")
+db = client.testdb
+
+@app.route("/")
+def home():
+    return "AI Model Running"
+
+if _name_ == "_main_":
+    app.run(host="0.0.0.0", port=5000)
+
+10. index.html : 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Docker App</title>
+  </head>
+  <body>
+    <h1>AI Docker Application</h1>
+    <p>Frontend running in Nginx container.</p>
+  </body>
+</html>
